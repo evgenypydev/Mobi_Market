@@ -34,9 +34,14 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'drf_yasg',
+    'django_twilio',
 
     "users",
 ]
+
+TWILIO_ACCOUNT_SID = 'AC4746d6a73538bba946dd09a36dc0177e'
+TWILIO_AUTH_TOKEN = 'f29666c056807535d596ff63a235a0ce'
+TWILIO_PHONE_NUMBER = '+14302343494'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
