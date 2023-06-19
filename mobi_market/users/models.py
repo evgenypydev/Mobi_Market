@@ -5,10 +5,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True)
-    first_name = models.CharField(max_length=50, blank=True, null=True)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
+    first_name = models.CharField(max_length=50,)
+    last_name = models.CharField(max_length=100,)
     email = models.EmailField(unique=True)
-    avatar = models.CharField(max_length=250, blank=True, null=True)
+    avatar = models.ImageField(upload_to="mobi_market/avatars/", blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     phone_number = PhoneNumberField()
     verification_code = models.CharField(max_length=4, blank=True, null=True)
@@ -18,7 +18,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
-
     objects = UserManager()
 
     def __str__(self):
