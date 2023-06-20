@@ -26,10 +26,7 @@ class UserCreateAPIView(CreateAPIView):
     @swagger_auto_schema(
         request_body=UserCreateSerializer,
         operation_description="This endpoint create user.",
-        responses={
-            201: 'User create successfully',
-            400: 'Bad Request'
-        }
+        responses={201: 'User create successfully', 400: 'Bad Request'}
     )
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
@@ -38,11 +35,26 @@ class UserCreateAPIView(CreateAPIView):
 class UpdateUserPersonalInfoAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="This endpoint return user",
+        responses={
+            200: UpdateUserPersonalInfoSerializer,
+            400: 'Bad Request',
+        }
+    )
     def get(self, request):
         user = request.user
         serializer = UpdateUserPersonalInfoSerializer(user)
         return Response(serializer.data)
 
+    @swagger_auto_schema(
+        request_body=UpdateUserPersonalInfoSerializer,
+        operation_description="This endpoint update user profile.",
+        responses={
+            200: 'User profile update successfully',
+            400: 'Bad Request'
+        }
+    )
     def put(self, request):
         user = request.user
         serializer = UpdateUserPersonalInfoSerializer(user, data=request.data)
@@ -57,7 +69,7 @@ class UpdatePhoneNumberAPIView(APIView):
     @swagger_auto_schema(
         request_body=UpdatePhoneNumberSerializer,
         operation_description="This endpoint add phone number for user.",
-        responses={200: 'Phone number added successfully and verification code has been sent to your phone number.',400: 'Bad Request'}
+        responses={200: 'Phone number added successfully and verification code has been sent to your phone number.', 400: 'Bad Request'}
     )
     def put(self, request):
         user = request.user
@@ -81,7 +93,7 @@ class PhoneNumberVerifyAPIView(APIView):
         operation_description="This endpoint verify code from user phone number.",
         responses={200: 'Phone number verified successfully.',400: 'Please enter the correct verification code.'}
     )
-    def post(self, request):
+    def put(self, request):
         user = request.user
         verification_code = request.data.get('verification_code')
         if verification_code == user.verification_code:
