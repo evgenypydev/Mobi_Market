@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django_twilio',
 
     "users",
+    "products",
 ]
 
 TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
