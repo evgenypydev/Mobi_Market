@@ -4,7 +4,7 @@ from rest_framework import routers
 from .endpoints import CardProductByUserViewSet, CardProductListAPIView, CardProductRetrieveAPIView
 
 router = routers.DefaultRouter()
-router.register(r'my_products', CardProductByUserViewSet, basename='my_products')
+router.register(r'', CardProductByUserViewSet, basename='my_products')
 
 urlpatterns = [
     path('my_products/', include(router.urls)),
